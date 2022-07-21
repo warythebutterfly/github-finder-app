@@ -6,15 +6,16 @@ import { fetchUsers } from "../../context/github/GithubActions";
 
 function UserResults() {
   const { users, isLoading, filtered, dispatch } = useContext(GithubContext);
-  //   useEffect(() => {
-  //     fetchUsers();
-  //   }, []);
+
   useEffect(() => {
     dispatch({ type: "SET_ISLOADING" });
 
     const getUsers = async () => {
       const userData = await fetchUsers();
-      dispatch({ type: "GET_USERS", payload: userData });
+      if(userData.message)
+      dispatch({ type: "GET_USERS", payload: [] });
+      else dispatch({ type: "GET_USERS", payload: userData });
+      console.log(userData, "from user results")
     };
 
     getUsers();

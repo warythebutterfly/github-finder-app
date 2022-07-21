@@ -22,10 +22,17 @@ function UserSearch() {
         type: "SET_ISLOADING",
       });
       const users = await searchUsers(text);
-      dispatch({
-        type: "GET_FILTERED_USERS",
-        payload: users,
-      });
+      if (users) {
+        dispatch({
+          type: "GET_FILTERED_USERS",
+          payload: users,
+        });
+      } else {
+        dispatch({
+          type: "GET_FILTERED_USERS",
+          payload: [],
+        });
+      }
       setText("");
     }
   };
@@ -56,7 +63,10 @@ function UserSearch() {
 
       {filtered.length > 0 && (
         <div>
-          <button onClick={() => dispatch({type: "CLEAR_USERS"})} className="btn btn-ghost btn-lg">
+          <button
+            onClick={() => dispatch({ type: "CLEAR_USERS" })}
+            className="btn btn-ghost btn-lg"
+          >
             Clear
           </button>
         </div>
