@@ -6,7 +6,7 @@ import RepoList from "../components/repos/RepoList";
 import GithubContext from "../context/github/GithubContext";
 import {
   getUser,
-  getUserRepos,
+  getUserRepos
 } from "../context/github/GithubActions";
 
 function User() {
