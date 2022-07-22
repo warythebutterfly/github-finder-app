@@ -7,7 +7,6 @@ import GithubContext from "../context/github/GithubContext";
 import {
   getUser,
   getUserRepos,
-  getUserAndRepos,
 } from "../context/github/GithubActions";
 
 function User() {
