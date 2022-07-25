@@ -8,6 +8,7 @@ import { fetchUsers } from "../../context/github/GithubActions";
 function UserResults() {
   const { users, isLoading, filtered, dispatch } = useContext(GithubContext);
 
+ 
   useEffect(() => {
     dispatch({ type: "SET_ISLOADING" });
 
@@ -19,6 +20,12 @@ function UserResults() {
 
     getUsers();
   }, [dispatch]);
+  let text = ""
+  if(filtered.length !== 0){
+   
+  text = filtered[0].length === 1 ? "result" : "results"
+
+  }
 
   if (!isLoading && filtered.length === 0) {
     return (
@@ -58,7 +65,7 @@ function UserResults() {
               </div>
               <div>
                 <h2 className="card-title">
-                  Showing first 100 results
+                  Showing first 30 results
                 </h2>
               </div>
             </div>
@@ -81,7 +88,7 @@ function UserResults() {
               </div>
               <div>
                 <h2 className="card-title">
-                  About {filtered[1].toLocaleString()} results
+                  About {filtered[1].toLocaleString()} {text}
                 </h2>
               </div>
             </div>
@@ -103,8 +110,9 @@ function UserResults() {
                 </div>
               </div>
               <div>
+                
                 <h2 className="card-title">
-                  Showing  {filtered[1] >= 100 ? 100 : filtered[1]} results
+                  Showing  {filtered[1] >= 100 ? 100 : filtered[1]} {text}
                 </h2>
               </div>
             </div>

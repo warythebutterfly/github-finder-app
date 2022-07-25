@@ -4,10 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import Spinner from "../components/layout/Spinner";
 import RepoList from "../components/repos/RepoList";
 import GithubContext from "../context/github/GithubContext";
-import {
-  getUser,
-  getUserRepos
-} from "../context/github/GithubActions";
+import { getUser, getUserRepos } from "../context/github/GithubActions";
 
 function User() {
   const { user, repos, isLoading, dispatch } = useContext(GithubContext);
@@ -120,13 +117,16 @@ function User() {
                   <div className="stat">
                     <div className="stat-title text-md">Website</div>
                     <div className="text-lg stat-value">
-                      <a
-                        href={`https://${blog}`}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {blog}
-                      </a>
+                      {(blog.includes("http") || blog.includes("https")) && (
+                        <a href={`${blog}`} target="_blank" rel="noreferrer">
+                          {blog}
+                        </a>
+                      )}
+                       {(!blog.includes("http") || !blog.includes("https")) && (
+                        <a href={`https://${blog}`} target="_blank" rel="noreferrer">
+                          {blog}
+                        </a>
+                      )}
                     </div>
                   </div>
                 )}
